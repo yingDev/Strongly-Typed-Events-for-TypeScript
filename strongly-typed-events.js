@@ -590,15 +590,22 @@ function createSignalList() {
         createEventDispatcher, createSimpleEventDispatcher, createSignalDispatcher,
         createEventList, createSimpleEventList, createSignalList
     ];
+   var exportable_names = [
+        'EventDispatcher', 'SimpleEventDispatcher', 'SignalDispatcher',
+        'EventList', 'SimpleEventList', 'SignalList',
+        'EventHandlingBase', 'SimpleEventHandlingBase', 'SignalHandlingBase',
+        'createEventDispatcher', 'createSimpleEventDispatcher', 'createSignalDispatcher',
+        'createEventList', 'createSimpleEventList', 'createSignalList'
+    ];
     // Node: Export function
     if (typeof module !== "undefined" && module.exports) {
-        exportables.forEach(function (exp) { return module.exports[nameof(exp)] = exp; });
+        exportables.forEach(function (exp,i) { return module.exports[exportable_names[i]] = exp; });
     }
     else if (typeof define === 'function' && define.amd) {
         exportables.forEach(function (exp) { return define(function () { return exp; }); });
     }
     else if (window) {
-        exportables.forEach(function (exp) { return window[nameof(exp)] = exp; });
+        exportables.forEach(function (exp,i) { return window[exportable_names[i]] = exp; });
     }
     function nameof(fn) {
         return typeof fn === 'undefined' ? '' : fn.name ? fn.name : (function () {

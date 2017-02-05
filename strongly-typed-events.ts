@@ -813,18 +813,25 @@ declare var define: any;
         createEventDispatcher, createSimpleEventDispatcher, createSignalDispatcher,
         createEventList, createSimpleEventList, createSignalList
     ];
+    let exportable_names = [
+        'EventDispatcher', 'SimpleEventDispatcher', 'SignalDispatcher',
+        'EventList', 'SimpleEventList', 'SignalList',
+        'EventHandlingBase', 'SimpleEventHandlingBase', 'SignalHandlingBase',
+        'createEventDispatcher', 'createSimpleEventDispatcher', 'createSignalDispatcher',
+        'createEventList', 'createSimpleEventList', 'createSignalList'
+    ];
 
     // Node: Export function
     if (typeof module !== "undefined" && module.exports) {
-        exportables.forEach(exp => module.exports[nameof(exp)] = exp);
+        exportables.forEach((exp,i) => module.exports[exportable_names[i]] = exp);
     }
     // AMD/requirejs: Define the module
     else if (typeof define === 'function' && define.amd) {
-        exportables.forEach(exp => define(() => exp));
+        exportables.forEach((exp,i) => define(() => exp));
     }
     //expose it through Window
     else if (window) {
-        exportables.forEach(exp => (window as any)[nameof(exp)] = exp);
+        exportables.forEach((exp,i) => (window as any)[exportable_names[i]] = exp);
     }
 
     function nameof(fn: any): string {
