@@ -1,21 +1,22 @@
 {
-    "compileOnSave": true,
+    "compileOnSave": false,
     "compilerOptions": {
         "declaration": true,
         "module": "commonjs",
         "noImplicitAny": false,
         "removeComments": false,
         "preserveConstEnums": true,
+        "moduleResolution": "node",
         "sourceMap": false,
         "target": "es5",
         "noEmitOnError": true
     },
     "files": [
-        "strongly-typed-events.ts",
-        "test/classic-test.ts",
+        "strongly-typed-events.ts"
+        /*"test/classic-test.ts",
         "test/event-test.ts",
         "test/signal-test.ts",
-        "test/simple-event-test.ts"
+        "test/simple-event-test.ts"*/
     ],
     "exclude": [
         "strongly-typed-events.js",

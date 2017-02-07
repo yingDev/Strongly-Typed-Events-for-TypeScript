@@ -66,6 +66,8 @@ interface ISubscribable<THandlerType> {
      */
     unsub(fn: THandlerType);
 
+    unsubAll();
+
     /**
      * Subscribes to the event only once.
      * @param fn The event handler that is will be unsubsribed from the event.
@@ -295,6 +297,11 @@ abstract class DispatcherBase<TEventHandler> implements ISubscribable<TEventHand
         this.unsubscribe(fn);
     }
 
+    public unsubAll()
+    {
+        this._subscriptions.length = 0;
+    }
+
     /**
      * Generic dispatch will dispatch the handlers with the given arguments. 
      * 
@@ -408,6 +415,7 @@ class DispatcherWrapper<THandler> implements ISubscribable<THandler>
     private _unsubscribe: (fn: THandler) => void;
     private _one: (fn: THandler) => void;
     private _has: (fn: THandler) => boolean;
+    private _unsubAll: ()=>void;
 
     /**
      * Creates a new EventDispatcherWrapper instance.
@@ -418,6 +426,7 @@ class DispatcherWrapper<THandler> implements ISubscribable<THandler>
         this._unsubscribe = (fn: THandler) => dispatcher.unsubscribe(fn);
         this._one = (fn: THandler) => dispatcher.one(fn);
         this._has = (fn: THandler) => dispatcher.has(fn);
+        this._unsubAll = () => dispatcher.unsubAll();
     }
 
     /**
@@ -450,6 +459,11 @@ class DispatcherWrapper<THandler> implements ISubscribable<THandler>
      */
     public unsub(fn: THandler) {
         this.unsubscribe(fn);
+    }
+
+    public unsubAll()
+    {
+        this._unsubAll();
     }
 
     /** 

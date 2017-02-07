@@ -121,6 +121,9 @@ var DispatcherBase = (function () {
     DispatcherBase.prototype.unsub = function (fn) {
         this.unsubscribe(fn);
     };
+    DispatcherBase.prototype.unsubAll = function () {
+        this._subscriptions.length = 0;
+    };
     /**
      * Generic dispatch will dispatch the handlers with the given arguments.
      *
@@ -158,7 +161,7 @@ var DispatcherBase = (function () {
 var EventDispatcher = (function (_super) {
     __extends(EventDispatcher, _super);
     function EventDispatcher() {
-        _super.apply(this, arguments);
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     /**
      * Dispatches the event.
@@ -185,7 +188,7 @@ var EventDispatcher = (function (_super) {
 var SimpleEventDispatcher = (function (_super) {
     __extends(SimpleEventDispatcher, _super);
     function SimpleEventDispatcher() {
-        _super.apply(this, arguments);
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     /**
      * Dispatches the event.
@@ -210,7 +213,7 @@ var SimpleEventDispatcher = (function (_super) {
 var SignalDispatcher = (function (_super) {
     __extends(SignalDispatcher, _super);
     function SignalDispatcher() {
-        _super.apply(this, arguments);
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     /**
      * Dispatches the signal.
@@ -240,6 +243,7 @@ var DispatcherWrapper = (function () {
         this._unsubscribe = function (fn) { return dispatcher.unsubscribe(fn); };
         this._one = function (fn) { return dispatcher.one(fn); };
         this._has = function (fn) { return dispatcher.has(fn); };
+        this._unsubAll = function () { return dispatcher.unsubAll(); };
     }
     /**
      * Subscribe to the event dispatcher.
@@ -268,6 +272,9 @@ var DispatcherWrapper = (function () {
      */
     DispatcherWrapper.prototype.unsub = function (fn) {
         this.unsubscribe(fn);
+    };
+    DispatcherWrapper.prototype.unsubAll = function () {
+        this._unsubAll();
     };
     /**
      * Subscribe once to the event with the specified name.
@@ -321,7 +328,7 @@ var EventListBase = (function () {
 var EventList = (function (_super) {
     __extends(EventList, _super);
     function EventList() {
-        _super.apply(this, arguments);
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     /**
      * Creates a new dispatcher instance.
@@ -338,7 +345,7 @@ var EventList = (function (_super) {
 var SimpleEventList = (function (_super) {
     __extends(SimpleEventList, _super);
     function SimpleEventList() {
-        _super.apply(this, arguments);
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     /**
      * Creates a new dispatcher instance.
@@ -355,7 +362,7 @@ var SimpleEventList = (function (_super) {
 var SignalList = (function (_super) {
     __extends(SignalList, _super);
     function SignalList() {
-        _super.apply(this, arguments);
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     /**
      * Creates a new dispatcher instance.
@@ -590,7 +597,7 @@ function createSignalList() {
         createEventDispatcher, createSimpleEventDispatcher, createSignalDispatcher,
         createEventList, createSimpleEventList, createSignalList
     ];
-   var exportable_names = [
+    var exportable_names = [
         'EventDispatcher', 'SimpleEventDispatcher', 'SignalDispatcher',
         'EventList', 'SimpleEventList', 'SignalList',
         'EventHandlingBase', 'SimpleEventHandlingBase', 'SignalHandlingBase',
@@ -599,13 +606,13 @@ function createSignalList() {
     ];
     // Node: Export function
     if (typeof module !== "undefined" && module.exports) {
-        exportables.forEach(function (exp,i) { return module.exports[exportable_names[i]] = exp; });
+        exportables.forEach(function (exp, i) { return module.exports[exportable_names[i]] = exp; });
     }
     else if (typeof define === 'function' && define.amd) {
-        exportables.forEach(function (exp) { return define(function () { return exp; }); });
+        exportables.forEach(function (exp, i) { return define(function () { return exp; }); });
     }
     else if (window) {
-        exportables.forEach(function (exp,i) { return window[exportable_names[i]] = exp; });
+        exportables.forEach(function (exp, i) { return window[exportable_names[i]] = exp; });
     }
     function nameof(fn) {
         return typeof fn === 'undefined' ? '' : fn.name ? fn.name : (function () {
