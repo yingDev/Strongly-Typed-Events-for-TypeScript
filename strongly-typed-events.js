@@ -1,4 +1,11 @@
-/// <reference path="typings/node/node.d.ts" />
+/*!
+ * Strongly Typed Events for TypeScript - 0.4.1
+ * https://github.com/KeesCBakker/StronlyTypedEvents/
+ * http://keestalkstech.com
+ *
+ * Copyright Kees C. Bakker / KeesTalksTech
+ * Released under the MIT license
+ */
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];

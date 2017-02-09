@@ -1,6 +1,6 @@
 {
   "name": "strongly-typed-events",
-  "version": "0.4.1",
+  "version": "0.5",
   "description": "Add the power of events to your (TypeScript) projects!",
   "main": "strongly-typed-events.js",
   "directories": {
@@ -8,7 +8,7 @@
     "test": "tests",
     "dist": "dist"
   },
-  "types":"strongly-typed-events.d.ts",
+  "types": "strongly-typed-events.d.ts",
   "scripts": {
     "test": "node_modules/.bin/mocha --reporter spec"
   },
@@ -40,5 +40,10 @@
   },
   "engines": {
     "node": ">=4.2.4"
+  },
+  "dependencies": {
+    "@types/chai": "^3.4.34",
+    "@types/mocha": "^2.2.39",
+    "@types/node": "^7.0.5"
   }
 }

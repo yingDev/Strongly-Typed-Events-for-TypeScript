@@ -1,4 +1,3 @@
-/// <reference path="typings/node/node.d.ts" />
 /*!
  * Strongly Typed Events for TypeScript - 0.4.1
  * https://github.com/KeesCBakker/StronlyTypedEvents/
