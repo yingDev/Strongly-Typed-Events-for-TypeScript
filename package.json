@@ -1,6 +1,6 @@
 {
   "name": "strongly-typed-events",
-  "version": "0.5",
+  "version": "0.5.0",
   "description": "Add the power of events to your (TypeScript) projects!",
   "main": "strongly-typed-events.js",
   "directories": {
